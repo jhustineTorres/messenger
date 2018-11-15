@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>nuntius</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+    <link href="style.css"  rel="stylesheet" type="text/css">
+  </head>
+<body>
+  <div class="container">
+    <div class="row" id="row1main">
+      <div class="col-md-3" id="collist">
+        <div>
+            <h1>Account List</h1>
+            <ul class="collection" id="accountList">
+                <!-- for user list ul li -->
+            </ul>
+            <h2>Contact List</h2>
+            <ul class="chatList">
+
+            </ul>
+        </div>
+        
+        <!-- <div class="users" id="user">
+            <h3>Users List</h3>            
+            <table id="tbl_users_list" border="1">
+              <tr>
+              <td></td>
+              </tr>
+            </table>
+        </div>
+           -->
+        <div>
+          <!-- Trigger the modal with a button -->
+          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2" id="modalNewMessage">Create New Message</button>
+
+          <!-- Modal -->
+          <div id="myModal2" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header" id="newMessageHeader">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title" id="newMessageTitle">New Message</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="users" id="user">
+                    <h3 id="newMessageSendTo">Send to</h3>
+                    <ul class="collection" id="newMessageList">
+                      <!-- for user list ul li -->
+                    </ul>
+                    <input type="text" placeholder="  type message" id="newMessageTextBox">
+                  </div>
+                  <input type="button" value="Send" class="newMessageSave" id="newMessageSendButton"/>
+                </div>
+              </div>
+            </div>
+            <div>
+              <!-- Trigger the modal with a button -->
+              <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="addContactButton">New Account</button>
+
+              <!-- Modal -->
+              <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header" id="newMessageHeader">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title" id="newMessageTitle">New Contact</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table>
+                          <tr>
+                            <td>User Name: </td>
+                            <td><input type="text" name="user_name" id="user_name"/></td>
+                          </tr>
+                        </table>
+                      <input type="button" value="Save" class="saveNewContact" id="newAccountSendButton"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- chatbox -->
+      <div class="col-md-9">
+        <div id="frame">
+          <div class="content">
+            <!-- <div class="contact-profile">
+              <p style="margin-left: 40%;"></p>
+              
+            </div> -->
+            <div class="messages" id="chatBox">
+              <ul class="messagess">
+                
+              </ul>
+            </div>
+            <div class="message-input">
+              <div class="wrap">
+              <input class="messageBox" type="text" placeholder="Write your message." />
+              <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
+  <script>
+// Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDEP3Id9Rp-AOejQi4DY99322ETO0815rI",
+      authDomain: "group-chat-codinginfinit-bca32.firebaseapp.com",
+      databaseURL: "https://group-chat-codinginfinit-bca32.firebaseio.com",
+      projectId: "group-chat-codinginfinit-bca32",
+      storageBucket: "group-chat-codinginfinit-bca32.appspot.com",
+      messagingSenderId: "925230422844"
+    };
+    firebase.initializeApp(config);
+    var user = firebase.auth().signInAnonymously();
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        var isAnonymous = user.isAnonymous;
+        user_id = user.uid;
+      } 
+      else {
+        // User is signed out.
+      }
+    });
+</script>
+
+<script src="index.js"></script>
+
+
+</body>
+</html>
