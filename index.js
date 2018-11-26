@@ -1,91 +1,6 @@
 var chatList = document.getElementById('userList');
 var databaseRef = firebase.database().ref('users/');
 
-var $newMessageList=$("#newMessageList");
-console.log(databaseRef);
-      
-databaseRef.once('value', function(snapshot) {
-  snapshot.forEach(function(childSnapshot) {
-     var childData = childSnapshot.val();
-    $newMessageList.append('<li><input type="radio" class="accountList" name="users" value="'+childSnapshot.key+'">'+childData.name+'</li>')
-  })
-});
-
-$("body").on("click",".accountList",function(){
-  var value=$(this).val();
-  var conversationid= value;
-  var userList= value;
-  var accountList= value;
-  console.log(value);
-
-  function writeUserData(message) {
-    var creatorId= firebase.database().ref('messages').child(accountList);
-    // // var db_ref = firebase.database().ref('messages').child(conversationid).child('conversation');
-    creatorId.push({
-      message: message,
-      
-     
-      
-    });
-    var receiverId= firebase.database().ref('chat').child(userList);
-    receiverId.push({
-      1: conversationid,
-    });
-    // var conversationid = firebase.database().ref('messages').child('conversation');
-    // conversationid.push({
-    //   conversation: "",
-    // });
-  }
-  $('.newMessageSave').click(function() {
-    newMessage();
-  });
-
-  function newMessage() {
-    message = $("#user input").val();
-    if($.trim(message) == '') {
-      return false;
-    }
-    writeUserData(message);
-  };
-
-  // $('.messageBox').on('keydown', function(e) {
-  //   console.log(e);
-  //   if (e.which == 13) {
-  //     newMessage();
-  //     return false;
-  //   } 
-  // });
-  // $(".chatList").empty();
-  // var databaseRef = firebase.database().ref('chat').child(value).once('value', function(snapshot) {
-  //   snapshot.forEach(function(childSnapshot) {
-  //     var childData = childSnapshot.val();
-  //     console.log(childSnapshot)
-  //     // $(".chatList").append('<li><input type="radio" class="chatListitem"  name="users" value="'+childSnapshot.val()+'">'+childData+'</li>')
-  //     function writeNewMessage(NewMessage) {
-       
-  //       var db_ref = firebase.database().ref('messages').child(value).child('conversation');
-  //       db_ref.push({
-  //         user_id: user_id,
-  //         message: message
-  //       });
-  //     }
-  //     $('.newMessageSave').click(function() {
-  //       newMessage();
-  //     });
-    
-  //   })
-  // });;
-});
-   
-function save_newMessage(){
-  var user_name = document.getElementById('user_name').value;
-  firebase.database().ref().child('users').push({name: user_name});
-}
-   ///////////////////////////////////////
-
-var chatList = document.getElementById('userList');
-var databaseRef = firebase.database().ref('users/');
-
 var $userList=$("#accountList");
 console.log(databaseRef);
       
@@ -96,8 +11,7 @@ databaseRef.once('value', function(snapshot) {
     
   })
 });
-
-
+//////////////////////////////////////
 $("body").on("click",".userList",function(){
   var value=$(this).val();
   $(".chatList").empty();
@@ -110,25 +24,7 @@ $("body").on("click",".userList",function(){
     })
   });;
 })
-
-/////////////////////////////////////
-
-databaseRef.on('child_added', function(snapshot) {
-  var childData = snapshot.val();
-  var node = document.getElementsByClassName('.chatList');
-});
-   
-$('.saveNewContact').click(function() {
-  save_user();
-});
-
-function save_user(){
-  var user_name = document.getElementById('user_name').value;
-  firebase.database().ref().child('users').push({name: user_name});
-  firebase.database().ref().child('chat').push({0:"Team Chat"});
-}
-     ///////////////////////////////////////////////////////////////////
-
+///////////////////////////////////////////
 var conversationid;
    
 $("body").on("click",".chatListitem",function(){
@@ -178,13 +74,14 @@ $("body").on("click",".chatListitem",function(){
       return false;
     } 
   });
-  // $('.newMessageSave').click(function() {
-  //   createNewMessageEntry();
-  // });
-  // function createNewMessageEntry(){
-    
-  //  var creatorId=firebase.database().ref()
-  //   db_ref.push({
-  //     conversation:"",
-  // })};
 })
+///////////////////////////////////
+$('.saveNewContact').click(function() {
+  save_user();
+});
+
+function save_user(){
+  var user_name = document.getElementById('user_name').value;
+  firebase.database().ref().child('users').push({name: user_name});
+  firebase.database().ref().child('chat').child().push({0:"Team Chat"});
+}
